@@ -28,17 +28,17 @@
         )
     </insert>
 
-    <select id="queryTopN" resultMap="BaseResultMap" parameterType="java.util.Map">
+    <select id="queryTopN" resultMap="BaseResultMap">
         select <include refid="Base_Column_List" />
-        from event_queue_${tbNum}
+        from event_queue_${param1}
         order by id
-        limit #{limit}
+        limit #{param2}
     </select>
     
     <delete id="batchClean" parameterType="java.util.Map">
-        delete from event_queue_${tbNum}
+        delete from event_queue_${param1}
         where id in
-        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        <foreach item="item" index="index" collection="param2" open="(" separator="," close=")">
             #{item}
         </foreach>
     </delete>
