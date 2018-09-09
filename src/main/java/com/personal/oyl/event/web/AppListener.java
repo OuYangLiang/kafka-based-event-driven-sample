@@ -24,11 +24,14 @@ public class AppListener implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private EventMapper mapper;
     
+    @Autowired
+    private Sub1 sub1;
+    
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         if (event.getApplicationContext().getParent() == null) {
-            SubscriberConfig.instance().addSubscriber("Event Type", new Sub1());
+            SubscriberConfig.instance().addSubscriber("o_c", sub1);
             
             
             EventConsumer consumer = new EventConsumer();

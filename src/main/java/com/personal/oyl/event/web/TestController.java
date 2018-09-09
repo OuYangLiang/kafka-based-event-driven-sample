@@ -1,36 +1,44 @@
 package com.personal.oyl.event.web;
 
-import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.personal.oyl.event.Event;
-import com.personal.oyl.event.EventMapper;
-import com.personal.oyl.event.EventPublisher;
+import com.personal.oyl.event.order.Order;
+import com.personal.oyl.event.order.OrderFactory;
+import com.personal.oyl.event.order.OrderRepos;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
     
     @Autowired
-    private EventMapper mapper;
+    private OrderRepos repos;
     
-    @RequestMapping("/{param}")
+    @Autowired
+    private OrderFactory orderFactory;
+    
+    @RequestMapping("/createOrder")
     @ResponseBody
-    public Object hello(@PathVariable String param) {
-        
-        EventPublisher publisher = new EventPublisher(mapper);
-        
-        for (int i = 0; i <= 1000; i++) {
-            Event event = new Event("Event Type", new Date(), param + "_" + i, i);
+    public Object hello() {
+        for (int i = 1; i <= 1000; i++) {
+            Order order = orderFactory.randomOrder();
             
-            publisher.publish(event);
+            repos.createOrder(order);
         }
         
-        return "Hello " + param;
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        TestResult result = new TestResult();
+        result.setItems(repos.selectAllReport());
+        
+        return result;
     }
 }

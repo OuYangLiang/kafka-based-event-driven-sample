@@ -27,4 +27,8 @@
   </bean>
     
     <import resource="classpath:application-context-mybatis.xml" />
+    
+    <bean id="eventPublisher" class="com.personal.oyl.event.EventPublisher" >
+        <constructor-arg ref="eventMapper"/>
+    </bean>
 </beans>
