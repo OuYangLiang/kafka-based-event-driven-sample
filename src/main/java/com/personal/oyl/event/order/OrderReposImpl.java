@@ -40,9 +40,16 @@ public class OrderReposImpl implements OrderRepos {
         return reportDao.selectAll();
     }
 
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public void createOrderReport(OrderReport report) {
         reportDao.insert(report);
+    }
+    
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
+    @Override
+    public void updateOrderReport(OrderReport report) {
+        reportDao.update(report);
     }
 
 }
