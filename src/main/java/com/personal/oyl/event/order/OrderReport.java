@@ -1,7 +1,5 @@
 package com.personal.oyl.event.order;
 
-import com.personal.oyl.event.web.AppContext;
-
 public class OrderReport {
     private Long userId;
     private Long orderNum;
@@ -31,8 +29,4 @@ public class OrderReport {
         this.orderTotal = orderTotal;
     }
     
-    public void update() {
-        OrderReportDao dao = AppContext.getContext().getBean(OrderReportDao.class);
-        dao.update(this);
-    }
 }

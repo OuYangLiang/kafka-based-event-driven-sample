@@ -10,4 +10,6 @@ public interface OrderRepos {
     List<OrderReport> selectAllReport();
     
     void createOrderReport(OrderReport report);
+    
+    void updateOrderReport(OrderReport report);
 }

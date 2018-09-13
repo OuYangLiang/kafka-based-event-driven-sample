@@ -31,7 +31,7 @@ public class Sub1 implements BaseSubscriber {
             report.setOrderNum(report.getOrderNum() + 1);
             report.setOrderTotal(report.getOrderTotal() + order.getOrderAmount());
             
-            report.update();
+            repos.updateOrderReport(report);
         }
     }
 
