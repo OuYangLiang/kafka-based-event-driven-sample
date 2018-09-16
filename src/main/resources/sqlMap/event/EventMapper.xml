@@ -6,27 +6,24 @@
         <result column="event_type" property="eventType" jdbcType="VARCHAR" />
         <result column="event_time" property="eventTime" jdbcType="TIMESTAMP" />
         <result column="context" property="context" jdbcType="VARCHAR" />
-        <result column="group" property="group" jdbcType="INTEGER" />
 	</resultMap>
 
 
 	<sql id="Base_Column_List">
-        event_id, event_type, event_time, context, `group`
+        event_id, event_type, event_time, context
 	</sql>
   
-    <insert id="insert" parameterType="com.personal.oyl.event.Event">
-        insert into event_queue_${tbNum}(
+    <insert id="insert">
+        insert into event_queue_${param1}(
             event_id,
             event_type,
             event_time,
-            context,
-            `group`
+            context
         ) values (
-            #{eventId,jdbcType=VARCHAR},
-            #{eventType,jdbcType=VARCHAR},
-            #{eventTime,jdbcType=TIMESTAMP},
-            #{context,jdbcType=VARCHAR},
-            #{group,jdbcType=INTEGER}
+            #{param2.eventId,jdbcType=VARCHAR},
+            #{param2.eventType,jdbcType=VARCHAR},
+            #{param2.eventTime,jdbcType=TIMESTAMP},
+            #{param2.context,jdbcType=VARCHAR}
         )
     </insert>
 
