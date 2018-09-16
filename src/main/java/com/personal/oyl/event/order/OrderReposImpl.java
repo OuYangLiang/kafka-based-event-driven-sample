@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.personal.oyl.event.EventPublisher;
+import com.personal.oyl.event.util.Configuration;
 
 @Component
 public class OrderReposImpl implements OrderRepos {
@@ -27,7 +28,7 @@ public class OrderReposImpl implements OrderRepos {
     @Override
     public void createOrder(Order order) {
         dao.insert(order);
-        publisher.publish("o_c", new Date(), order.json(), order.getUserId().intValue());
+        publisher.publish("o_c", new Date(), order.json(), order.getUserId().intValue() % Configuration.instance().getNumOfEventTables());
     }
 
     @Override
