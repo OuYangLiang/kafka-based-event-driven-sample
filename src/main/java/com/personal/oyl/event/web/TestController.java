@@ -1,7 +1,5 @@
 package com.personal.oyl.event.web;
 
-import java.util.concurrent.TimeUnit;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,21 +19,19 @@ public class TestController {
     @Autowired
     private OrderFactory orderFactory;
     
-    @RequestMapping("/createOrder")
+    @RequestMapping("/newOrder")
     @ResponseBody
-    public Object hello() {
-        for (int i = 1; i <= 1000; i++) {
-            Order order = orderFactory.randomOrder();
-            
-            repos.createOrder(order);
-        }
+    public Object newOrder() {
+        Order order = orderFactory.randomOrder();
         
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        repos.createOrder(order);
         
+        return order;
+    }
+    
+    @RequestMapping("/report")
+    @ResponseBody
+    public Object report() {
         TestResult result = new TestResult();
         result.setItems(repos.selectAllReport());
         

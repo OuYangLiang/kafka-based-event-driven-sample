@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.personal.oyl</groupId>
-  <artifactId>event-web</artifactId>
+  <artifactId>libevent-sample</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   
@@ -77,12 +77,12 @@
     </dependency>
     <dependency>
       <groupId>com.personal.oyl</groupId>
-      <artifactId>event-core</artifactId>
+      <artifactId>libevent</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <build>
-    <finalName>event-web</finalName>
+    <finalName>libevent-sample</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
