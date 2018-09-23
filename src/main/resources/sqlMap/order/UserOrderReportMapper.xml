@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.personal.oyl.event.order.OrderReportDao">
-	<resultMap id="BaseResultMap" type="com.personal.oyl.event.order.OrderReport">
+<mapper namespace="com.personal.oyl.event.order.UserOrderReportDao">
+	<resultMap id="BaseResultMap" type="com.personal.oyl.event.order.UserOrderReport">
         <result column="user_id" property="userId" jdbcType="DECIMAL" />
         <result column="order_num" property="orderNum" jdbcType="DECIMAL" />
         <result column="order_total" property="orderTotal" jdbcType="DECIMAL" />
@@ -9,17 +9,17 @@
   
     <select id="selectAll" resultMap="BaseResultMap">
         SELECT user_id, order_num, order_total
-        from `order_report`
+        from `user_order_report`
     </select>
   
     <select id="selectByKey" resultMap="BaseResultMap">
         SELECT user_id, order_num, order_total
-        from `order_report`
+        from `user_order_report`
         where user_id = #{userId,jdbcType=DECIMAL}
     </select>
 
-    <insert id="insert" parameterType="com.personal.oyl.event.order.OrderReport">
-        insert into `order_report`(
+    <insert id="insert" parameterType="com.personal.oyl.event.order.UserOrderReport">
+        insert into `user_order_report`(
             user_id,
             order_num,
             order_total
@@ -30,8 +30,8 @@
         )
     </insert>
     
-    <update id="update" parameterType="com.personal.oyl.event.order.OrderReport">
-        update `order_report` set
+    <update id="update" parameterType="com.personal.oyl.event.order.UserOrderReport">
+        update `user_order_report` set
         order_num = #{orderNum,jdbcType=DECIMAL},
         order_total =  #{orderTotal,jdbcType=DECIMAL}
         where user_id = #{userId,jdbcType=DECIMAL}

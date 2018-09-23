@@ -33,7 +33,8 @@ public class TestController {
     @ResponseBody
     public Object report() {
         TestResult result = new TestResult();
-        result.setItems(repos.selectAllReport());
+        result.setItems(repos.selectAllUserReport());
+        result.setDailyItems(repos.selectAllDailyReport());
         
         return result;
     }

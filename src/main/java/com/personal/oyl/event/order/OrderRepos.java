@@ -1,15 +1,24 @@
 package com.personal.oyl.event.order;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface OrderRepos {
     void createOrder(Order order);
     
-    OrderReport selectOrderReportByKey(Long userId);
+    UserOrderReport selectUserOrderReportByKey(Long userId);
     
-    List<OrderReport> selectAllReport();
+    List<UserOrderReport> selectAllUserReport();
     
-    void createOrderReport(OrderReport report);
+    void createUserOrderReport(UserOrderReport report);
     
-    void updateOrderReport(OrderReport report);
+    void updateUserOrderReport(UserOrderReport report);
+    
+    DailyOrderReport selectDailyOrderReportByKey(Date day);
+    
+    List<DailyOrderReport> selectAllDailyReport();
+    
+    void createDailyOrderReport(DailyOrderReport report);
+    
+    void updateDailyOrderReport(DailyOrderReport report);
 }

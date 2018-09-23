@@ -1,16 +1,27 @@
 package com.personal.oyl.event.order;
 
-public class OrderReport {
-    private Long userId;
+import java.sql.Date;
+
+public class DailyOrderReport {
+    private Long id;
+    private Date day;
     private Long orderNum;
     private Long orderTotal;
 
-    public Long getUserId() {
-        return userId;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getDay() {
+        return day;
+    }
+
+    public void setDay(Date day) {
+        this.day = day;
     }
 
     public Long getOrderNum() {
@@ -28,5 +39,4 @@ public class OrderReport {
     public void setOrderTotal(Long orderTotal) {
         this.orderTotal = orderTotal;
     }
-    
 }

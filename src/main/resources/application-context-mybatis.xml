@@ -65,8 +65,13 @@
     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
   </bean>
   
-  <bean id="orderReportDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-    <property name="mapperInterface" value="com.personal.oyl.event.order.OrderReportDao" />
+  <bean id="userOrderReportDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.personal.oyl.event.order.UserOrderReportDao" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+  
+  <bean id="dailyOrderReportDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.personal.oyl.event.order.DailyOrderReportDao" />
     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
   </bean>
   

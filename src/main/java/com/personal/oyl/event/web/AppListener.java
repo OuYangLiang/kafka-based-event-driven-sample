@@ -15,7 +15,8 @@ import com.personal.oyl.event.EventMapper;
 import com.personal.oyl.event.Master;
 import com.personal.oyl.event.SubscriberConfig;
 import com.personal.oyl.event.Worker;
-import com.personal.oyl.event.web.subscribers.Sub1;
+import com.personal.oyl.event.web.subscribers.UserOrderReportSubscriber;
+import com.personal.oyl.event.web.subscribers.DailyOrderReportSubscriber;
 
 @Component
 public class AppListener implements ApplicationListener<ContextRefreshedEvent> {
@@ -25,13 +26,17 @@ public class AppListener implements ApplicationListener<ContextRefreshedEvent> {
     private EventMapper mapper;
     
     @Autowired
-    private Sub1 sub1;
+    private UserOrderReportSubscriber sub1;
+    
+    @Autowired
+    private DailyOrderReportSubscriber sub2;
     
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         if (event.getApplicationContext().getParent() == null) {
             SubscriberConfig.instance().addSubscriber("o_c", sub1);
+            SubscriberConfig.instance().addSubscriber("o_c", sub2);
             
             
             EventConsumer consumer = new EventConsumer();
