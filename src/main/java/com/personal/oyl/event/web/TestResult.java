@@ -2,26 +2,36 @@ package com.personal.oyl.event.web;
 
 import java.util.List;
 
-import com.personal.oyl.event.order.OrderReport;
+import com.personal.oyl.event.order.DailyOrderReport;
+import com.personal.oyl.event.order.UserOrderReport;
 
 public class TestResult {
-    private List<OrderReport> items;
+    private List<UserOrderReport> items;
+    private List<DailyOrderReport> dailyItems;
     private long totalOrders;
     private long totalAmount;
 
-    public List<OrderReport> getItems() {
+    public List<UserOrderReport> getItems() {
         return items;
     }
 
-    public void setItems(List<OrderReport> items) {
+    public void setItems(List<UserOrderReport> items) {
         this.items = items;
 
         if (null != items) {
-            for (OrderReport report : items) {
+            for (UserOrderReport report : items) {
                 totalOrders += report.getOrderNum();
                 totalAmount += report.getOrderTotal();
             }
         }
+    }
+
+    public List<DailyOrderReport> getDailyItems() {
+        return dailyItems;
+    }
+
+    public void setDailyItems(List<DailyOrderReport> dailyItems) {
+        this.dailyItems = dailyItems;
     }
 
     public long getTotalOrders() {

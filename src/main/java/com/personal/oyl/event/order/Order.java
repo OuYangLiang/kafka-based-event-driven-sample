@@ -1,5 +1,7 @@
 package com.personal.oyl.event.order;
 
+import java.util.Date;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -8,6 +10,7 @@ public class Order {
     
     private Long id;
     private Long userId;
+    private Date orderTime;
     private Integer orderAmount;
 
     public Long getId() {
@@ -26,6 +29,14 @@ public class Order {
         this.userId = userId;
     }
 
+    public Date getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
+    }
+
     public Integer getOrderAmount() {
         return orderAmount;
     }
@@ -41,6 +52,22 @@ public class Order {
     
     public static Order fromJson(String json) {
         return gson.fromJson(json, Order.class);
+    }
+    
+    public static void main(String[] args) {
+        Order order = new Order();
+        order.setId(1l);
+        order.setUserId(21l);
+        order.setOrderTime(new Date());
+        order.setOrderAmount(100);
+        
+        String json = order.json();
+        
+        Order order2 = Order.fromJson(json);
+        String json2 = order2.json();
+        
+        System.out.println(json);
+        System.out.println(json2);
     }
 
 }

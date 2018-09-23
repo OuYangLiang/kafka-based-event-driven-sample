@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 import com.personal.oyl.event.BaseSubscriber;
 import com.personal.oyl.event.Event;
 import com.personal.oyl.event.order.Order;
-import com.personal.oyl.event.order.OrderReport;
+import com.personal.oyl.event.order.UserOrderReport;
 import com.personal.oyl.event.order.OrderRepos;
 
 @Component
-public class Sub1 implements BaseSubscriber {
+public class UserOrderReportSubscriber implements BaseSubscriber {
     
     @Autowired
     private OrderRepos repos;
@@ -18,20 +18,20 @@ public class Sub1 implements BaseSubscriber {
     @Override
     public void onEvent(Event e) {
         Order order = Order.fromJson(e.getContext());
-        OrderReport report = repos.selectOrderReportByKey(order.getUserId());
+        UserOrderReport report = repos.selectUserOrderReportByKey(order.getUserId());
         
         if (null == report) {
-            report = new OrderReport();
+            report = new UserOrderReport();
             report.setUserId(order.getUserId());
             report.setOrderNum(1l);
             report.setOrderTotal(new Long(order.getOrderAmount()));
             
-            repos.createOrderReport(report);
+            repos.createUserOrderReport(report);
         } else {
             report.setOrderNum(report.getOrderNum() + 1);
             report.setOrderTotal(report.getOrderTotal() + order.getOrderAmount());
             
-            repos.updateOrderReport(report);
+            repos.updateUserOrderReport(report);
         }
     }
 
