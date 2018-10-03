@@ -2,6 +2,8 @@ package com.personal.oyl.event.web;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
+
 import org.apache.zookeeper.KeeperException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,13 +12,12 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import com.personal.oyl.event.BaseSubscriber;
 import com.personal.oyl.event.EventConsumer;
 import com.personal.oyl.event.EventMapper;
 import com.personal.oyl.event.Master;
 import com.personal.oyl.event.SubscriberConfig;
 import com.personal.oyl.event.Worker;
-import com.personal.oyl.event.web.subscribers.UserOrderReportSubscriber;
-import com.personal.oyl.event.web.subscribers.DailyOrderReportSubscriber;
 
 @Component
 public class AppListener implements ApplicationListener<ContextRefreshedEvent> {
@@ -25,18 +26,18 @@ public class AppListener implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private EventMapper mapper;
     
-    @Autowired
-    private UserOrderReportSubscriber sub1;
+    @Resource
+    private BaseSubscriber dailyOrderReportSubscriber;
     
-    @Autowired
-    private DailyOrderReportSubscriber sub2;
+    @Resource
+    private BaseSubscriber userOrderReportSubscriber;
     
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         if (event.getApplicationContext().getParent() == null) {
-            SubscriberConfig.instance().addSubscriber("o_c", sub1);
-            SubscriberConfig.instance().addSubscriber("o_c", sub2);
+            SubscriberConfig.instance().addSubscriber("o_c", dailyOrderReportSubscriber);
+            SubscriberConfig.instance().addSubscriber("o_c", userOrderReportSubscriber);
             
             
             EventConsumer consumer = new EventConsumer();
