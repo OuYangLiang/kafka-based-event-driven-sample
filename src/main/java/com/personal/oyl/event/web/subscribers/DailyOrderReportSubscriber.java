@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.personal.oyl.event.BaseSubscriber;
+import com.personal.oyl.event.EventSubscriber;
 import com.personal.oyl.event.Event;
 import com.personal.oyl.event.EventMapper;
 import com.personal.oyl.event.order.DailyOrderReport;
@@ -17,7 +17,7 @@ import com.personal.oyl.event.order.Order;
 import com.personal.oyl.event.order.OrderRepos;
 
 @Component("dailyOrderReportSubscriber")
-public class DailyOrderReportSubscriber implements BaseSubscriber {
+public class DailyOrderReportSubscriber implements EventSubscriber {
     
     private static final Logger log = LoggerFactory.getLogger(DailyOrderReportSubscriber.class);
     
@@ -49,11 +49,16 @@ public class DailyOrderReportSubscriber implements BaseSubscriber {
                 repos.updateDailyOrderReport(report);
             }
             
-            eventMapper.archive("000000000002", e);
+            eventMapper.archive(this.id(), e);
         } catch (DuplicateKeyException ex) {
             log.warn("Duplicated message " + e.json());
         }
         
+    }
+
+    @Override
+    public String id() {
+        return "000000000002";
     }
 
 }

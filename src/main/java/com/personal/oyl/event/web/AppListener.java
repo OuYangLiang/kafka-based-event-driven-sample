@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import com.personal.oyl.event.BaseSubscriber;
+import com.personal.oyl.event.EventSubscriber;
 import com.personal.oyl.event.EventConsumer;
 import com.personal.oyl.event.EventMapper;
 import com.personal.oyl.event.Master;
@@ -27,10 +27,10 @@ public class AppListener implements ApplicationListener<ContextRefreshedEvent> {
     private EventMapper mapper;
     
     @Resource
-    private BaseSubscriber dailyOrderReportSubscriber;
+    private EventSubscriber dailyOrderReportSubscriber;
     
     @Resource
-    private BaseSubscriber userOrderReportSubscriber;
+    private EventSubscriber userOrderReportSubscriber;
     
 
     @Override
